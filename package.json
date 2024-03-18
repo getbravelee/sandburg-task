@@ -19,5 +19,9 @@
         "sass-loader": "^12.6.0",
         "vue": "^3.2.37",
         "vue-loader": "^16.8.3"
+    },
+    "dependencies": {
+        "cheerio": "^1.0.0-rc.12",
+        "puppeteer": "^22.5.0"
     }
 }
