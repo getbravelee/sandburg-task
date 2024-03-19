@@ -21,11 +21,16 @@ const fs = require("fs");
 
     lists.each((index, list) => {
         const name = $(list).find("div.product-unit-info > span").text();
-        crawledData.push({ index, name });
-        console.log({
-            index,
-            name,
-        });
+        const link = $(list).find("div.weblog > a").attr("href");
+
+        if (name.trim() !== "") {
+            crawledData.push({ index, name, link }); // 링크 추가
+            console.log({
+                index,
+                name,
+                link, // 콘솔에 출력하여 확인
+            });
+        }
     });
 
     // 크롤링한 데이터를 coupangBestData.json 파일로 저장
