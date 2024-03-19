@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coupang Best [식품]</title>
+    <title>Coupang Best Hotels</title>
     <style>
         table {
             width: 100%;
@@ -20,12 +20,12 @@
     </style>
 </head>
 <body>
-    <h1>Coupang Best Items</h1>
+    <h1>Coupang Best Hotels</h1>
     <table id="hotelTable">
         <thead>
             <tr>
                 <th>Index</th>
-                <th>상품명</th>
+                <th>Hotel Name</th>
             </tr>
         </thead>
         <tbody>
@@ -36,9 +36,7 @@
     <script>
         // 크롤링한 데이터를 표에 추가하는 함수
         function addRow(index, name) {
-            var table = document
-                .getElementById("hotelTable")
-                .getElementsByTagName("tbody")[0];
+            var table = document.getElementById("hotelTable").getElementsByTagName('tbody')[0];
             var newRow = table.insertRow();
             var cell1 = newRow.insertCell(0);
             var cell2 = newRow.insertCell(1);
@@ -50,10 +48,10 @@
         function addCrawledData() {
             var xhr = new XMLHttpRequest();
             xhr.open("GET", "coupangBestData.json", true);
-            xhr.onreadystatechange = function () {
+            xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     var crawledData = JSON.parse(xhr.responseText);
-                    crawledData.forEach(function (item) {
+                    crawledData.forEach(function(item) {
                         addRow(item.index, item.name);
                     });
                 }
@@ -65,6 +63,7 @@
         addCrawledData();
     </script>
 
-    <script src="js/test.js"></script>
+    <!-- 페이지가 로드될 때 test.js를 실행 -->
+    <script src="test.js"></script>
 </body>
 </html>

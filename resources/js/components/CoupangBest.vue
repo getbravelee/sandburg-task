@@ -9,8 +9,7 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- 크롤링한 데이터를 표시할 부분 -->
-                <tr v-for="item in crawledData" :key="item.index">
+                <tr v-for="(item, index) in crawledData" :key="index">
                     <td>{{ item.index }}</td>
                     <td>{{ item.name }}</td>
                 </tr>
@@ -23,32 +22,29 @@
 export default {
     data() {
         return {
-            crawledData: [], // 크롤링한 데이터를 저장할 배열
+            crawledData: [],
         };
     },
     mounted() {
-        // 컴포넌트가 마운트된 후에 크롤링한 데이터를 가져옴
-        this.fetchCrawledData();
+        // 컴포넌트가 마운트되면 JSON 파일을 가져와서 데이터를 로드합니다.
+        this.loadCrawledData();
     },
     methods: {
-        fetchCrawledData() {
-            // AJAX 또는 axios를 사용하여 서버에서 크롤링한 데이터를 가져옴
-            // 여기서는 간단히 정적 데이터를 사용하겠습니다.
-            // 서버에서 가져오는 방법에 따라 수정이 필요할 수 있습니다.
-            fetch("coupangBestData.json")
-                .then((response) => response.json())
-                .then((data) => {
-                    this.crawledData = data;
-                })
-                .catch((error) => {
-                    console.error("Error fetching crawled data:", error);
-                });
+        async loadCrawledData() {
+            try {
+                // JSON 파일 경로를 지정합니다. 예시로는 public 폴더에 위치한 파일을 가정합니다.
+                const response = await fetch("/coupangBestData.json");
+                const data = await response.json();
+                this.crawledData = data;
+            } catch (error) {
+                console.error("Error loading crawled data:", error);
+            }
         },
     },
 };
 </script>
 
-<style scoped>
+<style>
 table {
     width: 100%;
     border-collapse: collapse;
